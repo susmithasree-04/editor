@@ -3,27 +3,15 @@ import Editor from "./components/Editor";
 import Login from "./components/Login";
 import SessionList from "./components/SessionList";
 import "./App.css";
-
-// ---- Main App Component ----
-// Handles auth state and tab navigation between Editor and Sessions
-
 interface UserData {
   id: string;
   name: string;
   email: string;
 }
-
-// Two main tabs when logged in
 type ActiveTab = "editor" | "sessions";
-
 function App() {
-  // Current logged-in user (null = not logged in)
   const [user, setUser] = useState<UserData | null>(null);
-
-  // Which tab is active
   const [activeTab, setActiveTab] = useState<ActiveTab>("editor");
-
-  // Check localStorage on mount for existing session
   useEffect(() => {
     const savedUser = localStorage.getItem("vinotes-user");
     if (savedUser) {
@@ -35,23 +23,18 @@ function App() {
       }
     }
   }, []);
-
-  // Called when login/register succeeds
   const handleAuthSuccess = (userData: UserData) => {
     setUser(userData);
   };
-
-  // Logout — clear stored auth data
   const handleLogout = () => {
     localStorage.removeItem("vinotes-user");
     localStorage.removeItem("vinotes-token");
     setUser(null);
     setActiveTab("editor");
   };
-
   return (
     <div className="app">
-      {/* App header */}
+      {}
       <header className="app-header">
         <div className="header-content">
           <div>
@@ -60,8 +43,7 @@ function App() {
             </h1>
             <p className="app-subtitle">Writing Authenticity Platform</p>
           </div>
-
-          {/* Show logout button when logged in */}
+          {}
           {user && (
             <button className="logout-button" onClick={handleLogout}>
               Logout
@@ -69,12 +51,11 @@ function App() {
           )}
         </div>
       </header>
-
-      {/* Main content */}
+      {}
       <main className="app-main">
         {user ? (
           <>
-            {/* Tab navigation */}
+            {}
             <div className="tab-bar">
               <button
                 className={`tab-button ${activeTab === "editor" ? "active" : ""}`}
@@ -89,8 +70,7 @@ function App() {
                 📂 My Sessions
               </button>
             </div>
-
-            {/* Tab content */}
+            {}
             {activeTab === "editor" ? (
               <>
                 <div className="description-box">
@@ -111,13 +91,11 @@ function App() {
           <Login onAuthSuccess={handleAuthSuccess} />
         )}
       </main>
-
-      {/* Footer */}
+      {}
       <footer className="app-footer">
         <p>Vi-Notes © 2026 — Writing Authenticity Platform</p>
       </footer>
     </div>
   );
 }
-
 export default App;
