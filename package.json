@@ -2,7 +2,7 @@
   "name": "vi-notes-monorepo",
   "version": "1.0.0",
   "scripts": {
-    "build": "cd frontend && npm install && npm run build"
+    "build": "cd frontend && npm install && npm run build && mv dist ../dist"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
